@@ -10,7 +10,9 @@ import {
 } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, Tooltip, Typography } from 'antd';
 import { motion } from "framer-motion";
+import { useDispatch, useStore } from 'react-redux'
 import DashboardContent from './DashboardContent'
+import { updateState } from '../actions'
 
 const { Title } = Typography;
 
@@ -45,10 +47,9 @@ const items = [
 
 const Index = () => {
     const [collapsed, setCollapsed] = useState(false);
-
+    const dispatch = useDispatch()
     React.useEffect(() => {
         window.addEventListener('keydown', handleKeyListen)
-
         return () => {
             window.removeEventListener('keydown', handleKeyListen)
         }
@@ -58,6 +59,9 @@ const Index = () => {
         if (!e.shiftKey && !e.ctrlKey && e.altKey) {
             if (e.key.toLowerCase() === 'c') {
                 setCollapsed(!collapsed)
+            }
+            else if (e.key.toLowerCase() === 'r') {
+                dispatch(updateState({}))
             }
         }
     }
@@ -70,6 +74,8 @@ const Index = () => {
         >
             <Sider
                 collapsible
+                breakpoint="md"
+                collapsedWidth="0"
                 trigger={
                     <motion.div
                         className="box"
@@ -80,14 +86,14 @@ const Index = () => {
                 collapsed={collapsed}
                 onCollapse={(value) => setCollapsed(value)}
             >
-                <motion.div>
-                    <Title type="danger" level={4}>Web Assessment</Title>
+                <motion.div className='text-center'>
+                    <Title type="success" italic underline level={4}>Fitpeo</Title>
                 </motion.div>
                 <Menu theme="dark" defaultSelectedKeys={['dashboard']} mode="inline" items={items} />
             </Sider>
             <Layout className="site-layout">
                 <Layout.Content className="dashboard-content-container">
-                    <DashboardContent category = 'Dashboard'/>
+                    <DashboardContent category='Dashboard' />
                 </Layout.Content>
             </Layout>
         </Layout>

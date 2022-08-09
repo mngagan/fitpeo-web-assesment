@@ -50,7 +50,7 @@
   }
 
   .get-icon-container {
-    height: 100%;
+    height: 56px;
     width: 42px;
     border-radius: 10px;
     // background: rgb(193, 126, 77);
@@ -123,4 +123,47 @@
 
 .border-right-grey {
   border-right: 1px solid lightgrey;
+}
+
+.products-count-sold {
+  padding: 1px 8px
+}
+
+.products-list {
+  max-height: 251px;
+  overflow: auto;
+
+  .top-product-info {
+    padding: 0 5px;
+  }
+
+  .top-product-rank {
+    background-image: linear-gradient(#7ba4e7, #276bd7);
+    border-radius: 15px;
+    text-align: center;
+
+    .rank-text {
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      color: white;
+    }
+  }
+}
+
+.overview-info-elements {
+  text-align: center;
+
+  .ant-divider-horizontal {
+    margin: 0
+  }
+}
+
+.order-status-divider {
+  margin: 0;
+}
+
+.top5 {
+  position: relative;
+  top: 5px;
 }

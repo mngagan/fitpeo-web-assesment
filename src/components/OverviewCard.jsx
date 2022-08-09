@@ -1,35 +1,33 @@
 import { Row, Card, Col, Typography, Select, Divider } from 'antd'
 import React from 'react'
 import { Area } from '@ant-design/plots';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { overviewData } from '../constants'
+import { updateTime } from '../actions'
+
 
 function OverviewCard() {
-    const [data, setData] = React.useState([]);
+    const [data, setData] = React.useState(overviewData());
+    const timestamp = useSelector(state => state.data.timestamp)
     const users = useSelector(state => state.data.users)
     const activeUserId = useSelector(state => state.data.activeUserId)
     let { overview } = users.filter(eachUser => eachUser.id === activeUserId)[0]
 
+    const dispatch = useDispatch()
+
     React.useEffect(() => {
-        asyncFetch();
-    }, []);
-    const asyncFetch = () => {
-        fetch('https://gw.alipayobjects.com/os/bmw-prod/360c3eae-0c73-46f0-a982-4746a6095010.json')
-            .then((response) => response.json())
-            .then((json) => setData(json))
-            .catch((error) => {
-                console.log('fetch data failed', error);
-            });
-    };
+        setData(overviewData())
+    }, [timestamp])
     const config = {
-        data,
         xField: 'timePeriod',
         yField: 'value',
+        height: 275,
         xAxis: {
             range: [0, 1],
         },
     };
     return (
-        <Row>
+        <Row className={'overview-card-container'}>
             <Col span={24}>
                 <Card>
                     <Row>
@@ -43,11 +41,11 @@ function OverviewCard() {
                                 </Col>
                                 <Col span={24} className="pt-10">
                                     <Row>
-                                        <Col span={6}>
+                                        <Col span={8}>
                                             <Typography.Title level={4} strong >{overview.total}</Typography.Title>
                                         </Col>
-                                        <Col span={18}>
-                                            <span className='percentage-container'>
+                                        <Col span={16}>
+                                            <span className='percentage-container top5'>
                                                 <span className={overview.relativePercetage < 0 ? 'loss' : 'profit'}>
                                                     <Typography.Text strong type={overview.relativePercetage < 0 ? 'danger' : 'success'}>
                                                         {overview.relativePercetage > 0 ? `+${overview.relativePercetage}` : overview.relativePercetage}%
@@ -60,7 +58,7 @@ function OverviewCard() {
                                 <Col span={24} className='pt-20'>
                                     <Row>
                                         {overview.info.map((info, index) => {
-                                            return <Col span={12} key={index} className={'pl-10'}>
+                                            return <Col span={12} key={index} className={'pl-10 overview-info-elements'}>
                                                 <Row className={index % 2 == 0 ? 'border-right-grey' : ''}>
                                                     <Col span={24}>
                                                         <Typography.Text type='secondary' strong>{info.type}</Typography.Text>
@@ -80,14 +78,16 @@ function OverviewCard() {
                             <Row>
                                 <Col span={24} className='text-end' >
                                     <Typography.Text strong>Sort By:</Typography.Text>
-                                    <Select defaultValue="lucy" style={{ width: 72 }} bordered={false}>
+                                    <Select defaultValue="lucy" style={{ width: 72 }} bordered={false}
+                                        onChange={() => setData(overviewData())}
+                                    >
                                         <Select.Option value="Day">Day</Select.Option>
                                         <Select.Option value="Month">Month</Select.Option>
                                         <Select.Option value="lucy">Year</Select.Option>
                                     </Select>
                                 </Col>
                                 <Col span={24}>
-                                    <Area {...config} />
+                                    <Area {...config} data={data} />
                                 </Col>
                             </Row>
                         </Col>

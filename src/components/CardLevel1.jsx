@@ -15,10 +15,10 @@ function CardLevel1({ data = 'revenue', title = "Revenue", icon = <></>, currenc
     return (
         <Card>
             <Row>
-                <Col span={4}>
+                <Col span={6}>
                     {icon}
                 </Col>
-                <Col span={20}>
+                <Col span={18}>
                     <Row>
                         <Col span={24}>
                             <Typography.Title level={5} type="secondary">{title}</Typography.Title>

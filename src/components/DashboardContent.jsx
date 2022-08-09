@@ -8,9 +8,11 @@ import OverviewCard from './OverviewCard'
 import UserActivity from './UserActivity';
 import TopProducts from './TopProducts'
 import OrderStatus from './OrderStatus'
+import { updateTime, updateState } from '../actions';
+import { useDispatch, useStore } from 'react-redux'
 
 function DashboardContent({ category = 'Dashboard' }) {
-
+    const dispatch = useDispatch()
     return (
         <React.Fragment >
             <Row className='dashboard-parent'>
@@ -26,8 +28,8 @@ function DashboardContent({ category = 'Dashboard' }) {
                                 <SearchOutlined />
                                 <FlagTwoTone />
                                 <AppstoreTwoTone />
-                                <BellTwoTone />
-                                <SettingTwoTone />
+                                <BellTwoTone onClick={() => dispatch(updateState({}))} />
+                                <SettingTwoTone onClick={() => dispatch(updateTime({}))} />
                             </Space>
                         </Col>
                     </Row>
