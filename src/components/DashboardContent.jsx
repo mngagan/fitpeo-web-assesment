@@ -49,7 +49,7 @@ function DashboardContent({ category = 'Dashboard' }) {
                                         onClick: () => {
                                             console.log('Notification Clicked!');
                                         },
-                                    });} />
+                                    })} />
                                     <SettingTwoTone onClick={() => dispatch(updateTime({}))} />
                                 </Space>
                             </Col>
