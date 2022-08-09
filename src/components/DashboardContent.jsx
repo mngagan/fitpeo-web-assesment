@@ -11,6 +11,8 @@ import OrderStatus from './OrderStatus'
 import { updateTime, updateState } from '../actions';
 import { useDispatch, useStore, useSelector } from 'react-redux'
 import { motion } from "framer-motion";
+import { notification } from 'antd';
+
 
 
 function DashboardContent({ category = 'Dashboard' }) {
@@ -41,7 +43,13 @@ function DashboardContent({ category = 'Dashboard' }) {
                                     <SearchOutlined />
                                     <FlagTwoTone />
                                     <AppstoreTwoTone />
-                                    <BellTwoTone onClick={() => dispatch(updateState({}))} />
+                                    <BellTwoTone onClick={() => notification.open({
+                                        message: <strong>Shortcuts</strong>,
+                                        description: <><div><strong>Alt + v</strong>  Toggle sidebar</div><div><strong>Alt + r</strong>  Update data</div></>,
+                                        onClick: () => {
+                                            console.log('Notification Clicked!');
+                                        },
+                                    });} />
                                     <SettingTwoTone onClick={() => dispatch(updateTime({}))} />
                                 </Space>
                             </Col>
