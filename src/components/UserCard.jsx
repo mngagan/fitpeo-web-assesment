@@ -45,10 +45,12 @@ function UserCard() {
     };
 
     return (
-        <Card className='user-card-container'
+        <Card className='user-card-container' hoverable
             cover={<img className='user-card-cover-image' alt="Backdrop" src={URL} />}
         >
-            <Avatar className='avatar-image' size={80} src={<Image src={AVATAR_URL} />} />
+            <Col span={24} className='avatar-image-container'>
+                <Avatar className='avatar-image' size={80} src={<Image src={AVATAR_URL} />} />
+            </Col>
             <span className='three-dots'>...</span>
             <Col span={24} className='user-name text-center'><Typography.Title level={4}>{currentUser.name}</Typography.Title></Col>
             <Col span={24} className='user-designation text-center'><Typography.Text type="secondary" strong>{currentUser.designation}</Typography.Text></Col>
@@ -109,7 +111,7 @@ function UserCard() {
             </Col>
             <Col span={24}>
                 {currentUser.recentActivity.map((event, index) => {
-                    return <Row className={'pt-10'}>
+                    return <Row className={'pt-10'} key={index}>
                         <Col span={6}>
                             <Row className={'recent-activity-date-part'}>
                                 <Col span={24}>

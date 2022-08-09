@@ -48,7 +48,7 @@ function UserActivity() {
     return (
         <Row className="user-activity-caontainer">
             <Col span={24}>
-                <Card>
+                <Card hoverable>
                     <Row>
                         <Col span={24}>
                             <Row>

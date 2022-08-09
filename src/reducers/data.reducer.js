@@ -132,7 +132,8 @@ const initialState = () => ({
                 ]
             }
         }
-    ]
+    ],
+    siderCollapse: false
 })
 
 export default function (state = initialState(), action) {
@@ -142,6 +143,9 @@ export default function (state = initialState(), action) {
             return { ...state, payload }
         case 'UPDATE_TIME': {
             return { ...state, timestamp: new Date().getTime() }
+        }
+        case 'SIDER_COLLAPSE': {
+            return { ...state, siderCollapse: payload }
         }
         case 'UPDATE_STATE': {
             return { ...state, timestamp: new Date().getTime(), activeUserId: state.activeUserId === 'tom' ? 'jBen' : 'tom' }

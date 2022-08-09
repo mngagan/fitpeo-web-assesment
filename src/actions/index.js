@@ -12,3 +12,10 @@ export const updateTime = (data) => {
         payload: data
     }
 }
+
+export const updateSiderCollapse = (data) => {
+    return {
+        type: 'SIDER_COLLAPSE',
+        payload: data
+    }
+}

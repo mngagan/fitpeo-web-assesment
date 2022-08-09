@@ -13,12 +13,12 @@ function CardLevel1({ data = 'revenue', title = "Revenue", icon = <></>, currenc
     percentage = Math.round(percentage * 100) / 100
 
     return (
-        <Card>
+        <Card hoverable>
             <Row>
-                <Col span={6}>
+                <Col xxl={6} lg={6} md={4} xl={6} xs={6}>
                     {icon}
                 </Col>
-                <Col span={18}>
+                <Col xxl={18} lg={18} md={20} xl={18} xs={18} >
                     <Row>
                         <Col span={24}>
                             <Typography.Title level={5} type="secondary">{title}</Typography.Title>

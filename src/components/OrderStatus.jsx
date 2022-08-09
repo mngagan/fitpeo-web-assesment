@@ -2,6 +2,8 @@ import React from 'react'
 import { Card, Row, Col, Typography, Divider } from 'antd'
 import { EllipsisOutlined } from '@ant-design/icons'
 import { Pie, measureTextWidth } from '@ant-design/plots';
+import { getOrderStats } from '../constants'
+import { useSelector } from 'react-redux'
 
 const colors = [
   '#FF6B3B',
@@ -18,6 +20,13 @@ const colors = [
 
 function OrderStatus() {
 
+  const [data, setData] = React.useState(getOrderStats())
+  const timestamp = useSelector(state => state.data.timestamp)
+
+  React.useEffect(() => {
+    setData(getOrderStats())
+  }, [timestamp])
+
   function renderStatistic(containerWidth, text, style) {
     const { width: textWidth, height: textHeight } = measureTextWidth(text, style);
     const R = containerWidth / 2; // r^2 = (w / 2)^2 + (h - offsetY)^2
@@ -32,23 +41,9 @@ function OrderStatus() {
     return `<div style="${textStyleStr};font-size:${scale}em;line-height:${scale < 1 ? 1 : 'inherit'};">${text}</div>`;
   }
 
-  const data = [
-    {
-      type: 'Completed',
-      value: 27,
-    },
-    {
-      type: 'Pending',
-      value: 25,
-    },
-    {
-      type: 'Cancel',
-      value: 18,
-    }
-  ];
+
   const config = {
     appendPadding: 10,
-    data,
     angleField: 'value',
     colorField: 'type',
     radius: 1,
@@ -114,7 +109,7 @@ function OrderStatus() {
   return (
     <Row className={'order-status-container'}>
       <Col span={24}>
-        <Card>
+        <Card hoverable>
           <Row>
             <Col span={24}>
               <Row>
@@ -132,10 +127,10 @@ function OrderStatus() {
               </Row>
             </Col>
             <Col span={24} className='pt-10 order-status-chart' >
-              <Pie {...config} />
+              <Pie {...config} data={data} />
             </Col>
             <Col span={24}>
-              <Divider className='order-status-divider'/>
+              <Divider className='order-status-divider' />
             </Col>
             <Col span={24}>
               <Row>
@@ -143,7 +138,7 @@ function OrderStatus() {
                   return <Col span={8} key={index}>
                     <Row className='text-center'>
                       <Col span={24}>
-                        <Typography.Text strong type='secondary'>{value.type}</Typography.Text>
+                        <Typography.Text strong ellipsis={{ tooltip: true }} type='secondary'>{value.type}</Typography.Text>
                       </Col>
                       <Col span={24} className='pt-10'>
                         <Typography.Text strong>{value.value}</Typography.Text>
@@ -151,9 +146,6 @@ function OrderStatus() {
                     </Row>
                   </Col>
                 })}
-                {/* <Col span={8}></Col>
-                <Col span={8}></Col>
-                <Col span={8}></Col> */}
               </Row>
             </Col>
           </Row>

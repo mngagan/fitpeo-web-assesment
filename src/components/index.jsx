@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
-import 'antd/dist/antd.css';
-import './index.scss';
 import {
-    DesktopOutlined,
-    FileOutlined,
-    PieChartOutlined,
+    CalendarOutlined, DatabaseOutlined, FileOutlined, LeftOutlined, MessageOutlined, PieChartOutlined,
     TeamOutlined,
-    UserOutlined, RightOutlined, LeftOutlined, CalendarOutlined, MessageOutlined, DatabaseOutlined
+    UserOutlined
 } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, Tooltip, Typography } from 'antd';
+import { Layout, Menu, Tooltip, Typography } from 'antd';
+import 'antd/dist/antd.css';
 import { motion } from "framer-motion";
-import { useDispatch, useStore } from 'react-redux'
-import DashboardContent from './DashboardContent'
-import { updateState } from '../actions'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateSiderCollapse, updateState } from '../actions';
+import DashboardContent from './DashboardContent';
+import './index.scss';
+import { notification } from 'antd';
 
 const { Title } = Typography;
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Sider } = Layout;
 
 function getItem(label, key, icon, children) {
     return {
@@ -47,6 +46,7 @@ const items = [
 
 const Index = () => {
     const [collapsed, setCollapsed] = useState(false);
+    const notifRef = React.useRef(null)
     const dispatch = useDispatch()
     React.useEffect(() => {
         window.addEventListener('keydown', handleKeyListen)
@@ -55,6 +55,16 @@ const Index = () => {
         }
     })
 
+    React.useEffect(() => {
+        !notifRef.current && notification.open({
+            message: <strong>Shortcuts</strong>,
+            description: <><div><strong>Alt + v</strong>  Toggle sidebar</div><div><strong>Alt + r</strong>  Update data</div></>,
+            onClick: () => {
+                console.log('Notification Clicked!');
+            },
+        });
+        notifRef.current = true
+    }, [])
     const handleKeyListen = (e) => {
         if (!e.shiftKey && !e.ctrlKey && e.altKey) {
             if (e.key.toLowerCase() === 'c') {
@@ -84,10 +94,18 @@ const Index = () => {
                         <Tooltip title="Alt + c">{<LeftOutlined />}</Tooltip>
                     </motion.div>}
                 collapsed={collapsed}
-                onCollapse={(value) => setCollapsed(value)}
+                zeroWidthTriggerStyle={{ top: '14px' }}
+                onCollapse={(value) => {
+                    setCollapsed(value)
+                    dispatch(updateSiderCollapse(value))
+                }}
+                style={{ color: 'red' }}
             >
-                <motion.div className='text-center'>
-                    <Title type="success" italic underline level={4}>Fitpeo</Title>
+                <motion.div className='text-center'
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1 }}>
+                    <Title type="success" italic underline level={4} className='cursor-default'>Fitpeo</Title>
                 </motion.div>
                 <Menu theme="dark" defaultSelectedKeys={['dashboard']} mode="inline" items={items} />
             </Sider>

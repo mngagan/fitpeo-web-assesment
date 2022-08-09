@@ -29,9 +29,9 @@ function OverviewCard() {
     return (
         <Row className={'overview-card-container'}>
             <Col span={24}>
-                <Card>
+                <Card hoverable>
                     <Row>
-                        <Col span={8}>
+                        <Col xxl={8} xl={8} md={24} sm={24}>
                             <Row>
                                 <Col span={24}>
                                     <Typography.Text strong>Overview</Typography.Text>
@@ -74,7 +74,7 @@ function OverviewCard() {
                                 </Col>
                             </Row>
                         </Col>
-                        <Col span={16}>
+                        <Col xxl={16} xl={16} md={24} sm={24}>
                             <Row>
                                 <Col span={24} className='text-end' >
                                     <Typography.Text strong>Sort By:</Typography.Text>

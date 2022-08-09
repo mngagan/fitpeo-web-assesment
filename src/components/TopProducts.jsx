@@ -1,7 +1,8 @@
 import React from 'react'
-import { Card, Typography, Row, Col, Select } from 'antd'
+import { Card, Typography, Row, Col, Select, Divider } from 'antd'
+import { useSelector } from 'react-redux'
 
-const products = [
+let products = [
     {
         name: 'Polo blue T-shirt',
         countSold: '3.82k',
@@ -28,12 +29,23 @@ const products = [
         price: '$154.6'
     }
 ]
-
+function shuffle(array) {
+    array.sort(() => Math.random() - 0.5);
+    return array;
+}
 function TopProducts() {
+    const [data, setData] = React.useState(products)
+    const timestamp = useSelector(state => state.data.timestamp)
+
+    React.useEffect(() => {
+        setData(shuffle(products))
+    }, [timestamp])
+
+
     return (
         <Row className={'top-products-container'}>
             <Col span={24}>
-                <Card>
+                <Card hoverable>
                     <Row>
                         <Col span={24}>
                             <Row>
@@ -43,7 +55,7 @@ function TopProducts() {
                                     </span>
                                 </Col>
                                 <Col span={8} className="text-end">
-                                    <Select defaultValue="jack" bordered={false}>
+                                    <Select defaultValue="jack" bordered={false} onChange={() => setData(shuffle(products))}>
                                         <Select.Option value="jack">Weekly</Select.Option>
                                         <Select.Option value="lucy">Monthly</Select.Option>
                                         <Select.Option value="Yiminghe">Yearly</Select.Option>
@@ -53,8 +65,8 @@ function TopProducts() {
                         </Col>
                         <Col span={24}>
                             <Row className="products-list">
-                                {products.map((eachProd, index) => {
-                                    return <Col span={24} className='top-product-element pt-10'>
+                                {data.map((eachProd, index) => {
+                                    return <Col span={24} className='top-product-element pt-10' key={index}>
                                         <Row>
                                             <Col span={4} className='top-product-rank'>
                                                 <Typography.Text strong className="rank-text">#{index + 1}</Typography.Text>
@@ -77,6 +89,7 @@ function TopProducts() {
                                                 </Row>
                                             </Col>
                                         </Row>
+                                        <Divider className='order-status-divider' />
                                     </Col>
                                 })}
                             </Row>

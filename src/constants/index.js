@@ -214,3 +214,24 @@ export const secondUser = () => {
         ]
     }
 }
+
+export const getOrderStats = () => {
+    let data = [
+        {
+            type: 'Completed',
+            value: 27,
+        },
+        {
+            type: 'Pending',
+            value: 25,
+        },
+        {
+            type: 'Cancel',
+            value: 18,
+        }
+    ];
+    return data.map(record => {
+        record.value = randomnumber(20, 90, false)
+        return record
+    })
+}
