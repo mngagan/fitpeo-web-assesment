@@ -1,18 +1,17 @@
-import React from 'react'
-import { Col, Divider, Row, Space, Typography, Card } from 'antd';
-import { SearchOutlined, FlagTwoTone, AppstoreTwoTone, BellTwoTone, SettingTwoTone, GithubFilled } from '@ant-design/icons'
-import CardLevel1 from './CardLevel1'
-import GetIcon from './GetIcon'
-import UserCard from './UserCard'
-import OverviewCard from './OverviewCard'
-import UserActivity from './UserActivity';
-import TopProducts from './TopProducts'
-import OrderStatus from './OrderStatus'
-import { updateTime, updateState } from '../actions';
-import { useDispatch, useStore, useSelector } from 'react-redux'
+import { AppstoreTwoTone, BellTwoTone, FlagTwoTone, GithubFilled, SearchOutlined, SettingTwoTone } from '@ant-design/icons';
+import { Col, notification, Row, Space, Typography } from 'antd';
 import { motion } from "framer-motion";
-import { notification } from 'antd';
-import useWindowDimensions from './hooks/useDimensionHook'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateTime } from '../actions';
+import CardLevel1 from './CardLevel1';
+import GetIcon from './GetIcon';
+import useWindowDimensions from './hooks/useDimensionHook';
+import OrderStatus from './OrderStatus';
+import OverviewCard from './OverviewCard';
+import TopProducts from './TopProducts';
+import UserActivity from './UserActivity';
+import UserCard from './UserCard';
 
 
 function DashboardContent({ category = 'Dashboard' }) {

@@ -3,16 +3,15 @@ import {
     TeamOutlined,
     UserOutlined
 } from '@ant-design/icons';
-import { Layout, Menu, Tooltip, Typography } from 'antd';
+import { Layout, Menu, notification, Tooltip, Typography } from 'antd';
 import 'antd/dist/antd.css';
 import { motion } from "framer-motion";
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateSiderCollapse, updateState } from '../actions';
 import DashboardContent from './DashboardContent';
+import useWindowDimensions from './hooks/useDimensionHook';
 import './index.scss';
-import { notification } from 'antd';
-import useWindowDimensions from './hooks/useDimensionHook'
 const { Title } = Typography;
 
 const { Sider } = Layout;

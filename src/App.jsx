@@ -1,8 +1,8 @@
-import 'antd/dist/antd.min.css'
+import 'antd/dist/antd.min.css';
+import { Provider } from 'react-redux';
 import './App.scss';
 import Index from './components';
-import { Provider } from 'react-redux'
-import store from './store'
+import store from './store';
 
 function App() {
   return (

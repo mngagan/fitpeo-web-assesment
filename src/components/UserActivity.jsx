@@ -1,8 +1,8 @@
-import React from 'react'
-import { Card, Typography, Row, Col, Select } from 'antd'
 import { Area } from '@ant-design/plots';
-import { useDispatch, useStore, useSelector } from 'react-redux'
-import { getUserActivityData } from '../constants'
+import { Card, Col, Row, Select, Typography } from 'antd';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { getUserActivityData } from '../constants';
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

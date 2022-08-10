@@ -1,9 +1,9 @@
-import React from 'react'
-import { Card, Row, Col, Typography, Divider } from 'antd'
-import { EllipsisOutlined } from '@ant-design/icons'
-import { Pie, measureTextWidth } from '@ant-design/plots';
-import { getOrderStats } from '../constants'
-import { useSelector } from 'react-redux'
+import { EllipsisOutlined } from '@ant-design/icons';
+import { measureTextWidth, Pie } from '@ant-design/plots';
+import { Card, Col, Divider, Row, Typography } from 'antd';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { getOrderStats } from '../constants';
 
 const colors = [
   '#FF6B3B',

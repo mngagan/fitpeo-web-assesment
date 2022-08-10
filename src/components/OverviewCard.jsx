@@ -1,9 +1,8 @@
-import { Row, Card, Col, Typography, Select, Divider } from 'antd'
-import React from 'react'
 import { Area } from '@ant-design/plots';
-import { useSelector, useDispatch } from 'react-redux'
-import { overviewData } from '../constants'
-import { updateTime } from '../actions'
+import { Card, Col, Divider, Row, Select, Typography } from 'antd';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { overviewData } from '../constants';
 
 
 function OverviewCard() {
