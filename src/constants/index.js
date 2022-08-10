@@ -132,7 +132,7 @@ export const getUserActivityData = () => {
     }]
 
     return data.map(record => {
-        record.value = randomnumber(100, 520, false)
+        record.value = randomnumber(1000, 2200, false)
         return record
     })
 }

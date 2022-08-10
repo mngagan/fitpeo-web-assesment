@@ -58,7 +58,7 @@ function OverviewCard() {
                                 <Col span={24} className='pt-20'>
                                     <Row>
                                         {overview.info.map((info, index) => {
-                                            return <Col span={12} key={index} className={'pl-10 overview-info-elements'}>
+                                            return <Col span={12} key={index} className={' overview-info-elements'}>
                                                 <Row className={index % 2 == 0 ? 'border-right-grey' : ''}>
                                                     <Col span={24}>
                                                         <Typography.Text type='secondary' strong>{info.type}</Typography.Text>

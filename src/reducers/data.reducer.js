@@ -2,11 +2,11 @@ const initialState = () => ({
     name: '',
     revenue: 1234,
     orders: 5678,
-    customers: 456,
+    customers: 7456,
     reference: {
         revenue: 1235,
         orders: 5780,
-        customers: 444,
+        customers: 7910,
     },
     activeUserId: 'jBen',
     users: [
@@ -136,6 +136,39 @@ const initialState = () => ({
     siderCollapse: false
 })
 
+let sampleData = [
+    {
+        "revenue": 1983,
+        "orders": 6971,
+        "customers": 7266
+    },
+    {
+        "revenue": 8983,
+        "orders": 7950,
+        "customers": 9659
+    },
+    {
+        "revenue": 9161,
+        "orders": 6754,
+        "customers": 7135
+    },
+    {
+        "revenue": 9378,
+        "orders": 4521,
+        "customers": 5929
+    },
+    {
+        "revenue": 8246,
+        "orders": 2398,
+        "customers": 8169
+    },
+    {
+        "revenue": 3451,
+        "orders": 7554,
+        "customers": 9627
+    }
+]
+
 export default function (state = initialState(), action) {
     let { type, payload } = action
     switch (type) {
@@ -148,7 +181,11 @@ export default function (state = initialState(), action) {
             return { ...state, siderCollapse: payload }
         }
         case 'UPDATE_STATE': {
-            return { ...state, timestamp: new Date().getTime(), activeUserId: state.activeUserId === 'tom' ? 'jBen' : 'tom' }
+            return {
+                ...state, timestamp: new Date().getTime(),
+                activeUserId: state.activeUserId === 'tom' ? 'jBen' : 'tom',
+                ...sampleData[Math.floor(Math.random() * sampleData.length)]
+            }
         }
         default:
             return state

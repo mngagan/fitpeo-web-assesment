@@ -60,7 +60,7 @@ function UserCard() {
                         return <Col span={12} key={index} className='text-center pt-10'>
                             <Row className={index === 0 ? 'border-right-grey' : ''}>
                                 <Col span={24}>
-                                    <Typography.Title level={4}>{userInfo.value}</Typography.Title>
+                                    <Typography.Title level={4}>{numberWithCommas(userInfo.value)}</Typography.Title>
                                 </Col>
                                 <Col span={24}>
                                     <Typography.Text type="secondary" strong>{userInfo.type}</Typography.Text>

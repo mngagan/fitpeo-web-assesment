@@ -58,7 +58,7 @@ const Index = () => {
     React.useEffect(() => {
         !notifRef.current && notification.open({
             message: <strong>Shortcuts</strong>,
-            description: <><div><strong>Alt + v</strong>  Toggle sidebar</div><div><strong>Alt + r</strong>  Update data</div></>,
+            description: <><div><strong>Alt + c</strong>  Toggle sidebar</div><div><strong>Alt + r</strong>  Update data</div></>,
             onClick: () => {
                 console.log('Notification Clicked!');
             },
@@ -107,7 +107,12 @@ const Index = () => {
                     transition={{ delay: 1 }}>
                     <Title type="success" italic underline level={4} className='cursor-default'>Fitpeo</Title>
                 </motion.div>
-                <Menu theme="dark" defaultSelectedKeys={['dashboard']} mode="inline" items={items} />
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1 }}>
+                    <Menu theme="dark" defaultSelectedKeys={['dashboard']} mode="inline" items={items} />
+                </motion.div>
             </Sider>
             <Layout className="site-layout">
                 <Layout.Content className="dashboard-content-container">

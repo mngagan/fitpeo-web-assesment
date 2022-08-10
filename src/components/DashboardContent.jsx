@@ -23,7 +23,7 @@ function DashboardContent({ category = 'Dashboard' }) {
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}>
+                transition={{ delay: 0.5, default: { ease: "linear" } }}>
                 <Row className='dashboard-parent'>
                     <Col span={24}>
                         <Row>
@@ -45,7 +45,7 @@ function DashboardContent({ category = 'Dashboard' }) {
                                     <AppstoreTwoTone />
                                     <BellTwoTone onClick={() => notification.open({
                                         message: <strong>Shortcuts</strong>,
-                                        description: <><div><strong>Alt + v</strong>  Toggle sidebar</div><div><strong>Alt + r</strong>  Update data</div></>,
+                                        description: <><div><strong>Alt + c</strong>  Toggle sidebar</div><div><strong>Alt + r</strong>  Update data</div></>,
                                         onClick: () => {
                                             console.log('Notification Clicked!');
                                         },
@@ -60,8 +60,8 @@ function DashboardContent({ category = 'Dashboard' }) {
                             {level1CardsData.map((eachCard, index) => {
                                 return <Col xl={8} xxl={8} lg={8} md={24} sm={24} xs={24} key={index} className='level-1-cards-container'>
                                     <motion.div
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: index === 0 ? 0.8 : index === 1 ? 1 : 1.2 }}>
                                         <CardLevel1
                                             {...eachCard}
@@ -71,8 +71,8 @@ function DashboardContent({ category = 'Dashboard' }) {
                             })}
                             <Col span={24} className='p-10'>
                                 <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: 1.4 }}>
                                     <OverviewCard />
                                 </motion.div>
@@ -81,24 +81,24 @@ function DashboardContent({ category = 'Dashboard' }) {
                                 <Row>
                                     <Col xl={8} lg={24} className='p-10'>
                                         <motion.div
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
+                                            initial={{ opacity: 0, scale: 0.9 }}
+                                            animate={{ opacity: 1, scale: 1 }}
                                             transition={{ delay: 1.6 }}>
                                             <UserActivity />
                                         </motion.div>
                                     </Col>
                                     <Col xl={8} lg={12} className='p-10'>
                                         <motion.div
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
+                                            initial={{ opacity: 0, scale: 0.9 }}
+                                            animate={{ opacity: 1, scale: 1 }}
                                             transition={{ delay: 1.8 }}>
                                             <OrderStatus />
                                         </motion.div>
                                     </Col>
                                     <Col xl={8} lg={12} className='p-10'>
                                         <motion.div
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
+                                            initial={{ opacity: 0, scale: 0.9 }}
+                                            animate={{ opacity: 1, scale: 1 }}
                                             transition={{ delay: 2 }}>
                                             <TopProducts />
                                         </motion.div>
@@ -109,8 +109,8 @@ function DashboardContent({ category = 'Dashboard' }) {
                     </Col>
                     <Col xxl={6} xl={6} lg={6} md={siderCollapse ? 8 : 24} sm={24} className='p-10'>
                         <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 2.1 }}>
                             <UserCard />
                         </motion.div>

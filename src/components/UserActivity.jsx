@@ -4,6 +4,10 @@ import { Area } from '@ant-design/plots';
 import { useDispatch, useStore, useSelector } from 'react-redux'
 import { getUserActivityData } from '../constants'
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function UserActivity() {
     const [data, setData] = React.useState(getUserActivityData());
 
@@ -26,7 +30,7 @@ function UserActivity() {
         xField: 'year',
         yField: 'value',
         seriesField: 'country',
-        height : 172,
+        height: 172,
         color: ['#82d1de', '#cb302d', '#e3ca8c'],
         areaStyle: {
             fillOpacity: 0.7,
@@ -70,7 +74,9 @@ function UserActivity() {
                             <Typography.Text strong type='secondary'>This Month</Typography.Text>
                         </Col>
                         <Col span={24}>
-                            <Typography.Title level={4} >16,579</Typography.Title>
+                            <Typography.Title level={4} >
+                                {numberWithCommas(data.reduce((acc, curr) => { acc += curr.value; return acc }, 0))}
+                            </Typography.Title>
                         </Col>
                         <Col span={24} >
                             <Area {...config} />;
