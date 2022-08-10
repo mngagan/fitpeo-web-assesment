@@ -7,12 +7,12 @@ import { Layout, Menu, Tooltip, Typography } from 'antd';
 import 'antd/dist/antd.css';
 import { motion } from "framer-motion";
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateSiderCollapse, updateState } from '../actions';
 import DashboardContent from './DashboardContent';
 import './index.scss';
 import { notification } from 'antd';
-
+import useWindowDimensions from './hooks/useDimensionHook'
 const { Title } = Typography;
 
 const { Sider } = Layout;
@@ -46,6 +46,8 @@ const items = [
 
 const Index = () => {
     const [collapsed, setCollapsed] = useState(false);
+    const siderCollapse = useSelector(state => state.data.siderCollapse)
+    const { height, width } = useWindowDimensions();
     const notifRef = React.useRef(null)
     const dispatch = useDispatch()
     React.useEffect(() => {
@@ -55,13 +57,12 @@ const Index = () => {
         }
     })
 
+    console.log('in woidth', width, collapsed)
+
     React.useEffect(() => {
         !notifRef.current && notification.open({
             message: <strong>Shortcuts</strong>,
-            description: <><div><strong>Alt + c</strong>  Toggle sidebar</div><div><strong>Alt + r</strong>  Update data</div></>,
-            onClick: () => {
-                console.log('Notification Clicked!');
-            },
+            description: <><div><strong>Alt + c</strong>  Toggle sidebar</div><div><strong>Alt + r</strong>  Update data</div></>
         });
         notifRef.current = true
     }, [])
@@ -95,11 +96,11 @@ const Index = () => {
                     </motion.div>}
                 collapsed={collapsed}
                 zeroWidthTriggerStyle={{ top: '14px' }}
+                className="layout-sider-container"
                 onCollapse={(value) => {
                     setCollapsed(value)
                     dispatch(updateSiderCollapse(value))
                 }}
-                style={{ color: 'red' }}
             >
                 <motion.div className='text-center'
                     initial={{ opacity: 0 }}
@@ -115,7 +116,7 @@ const Index = () => {
                 </motion.div>
             </Sider>
             <Layout className="site-layout">
-                <Layout.Content className="dashboard-content-container">
+                <Layout.Content className={`dashboard-content-container`}>
                     <DashboardContent category='Dashboard' />
                 </Layout.Content>
             </Layout>

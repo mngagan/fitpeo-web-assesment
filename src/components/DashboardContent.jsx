@@ -12,11 +12,12 @@ import { updateTime, updateState } from '../actions';
 import { useDispatch, useStore, useSelector } from 'react-redux'
 import { motion } from "framer-motion";
 import { notification } from 'antd';
-
+import useWindowDimensions from './hooks/useDimensionHook'
 
 
 function DashboardContent({ category = 'Dashboard' }) {
     const siderCollapse = useSelector(state => state.data.siderCollapse)
+    const { height, width } = useWindowDimensions();
     const dispatch = useDispatch()
     return (
         <React.Fragment >
@@ -40,9 +41,11 @@ function DashboardContent({ category = 'Dashboard' }) {
                             <Col span={12} align='end'>
                                 <Space size={'large'} className={'dashboard-components-header-icons'}>
                                     <GithubFilled onClick={() => window.open('https://github.com/mngagan/fitpeo-web-assesment', "_blank")} />
-                                    <SearchOutlined />
-                                    <FlagTwoTone />
-                                    <AppstoreTwoTone />
+                                    {width > 500 && <>
+                                        <SearchOutlined />
+                                        <FlagTwoTone />
+                                        <AppstoreTwoTone />
+                                    </>}
                                     <BellTwoTone onClick={() => notification.open({
                                         message: <strong>Shortcuts</strong>,
                                         description: <><div><strong>Alt + c</strong>  Toggle sidebar</div><div><strong>Alt + r</strong>  Update data</div></>,
@@ -107,7 +110,7 @@ function DashboardContent({ category = 'Dashboard' }) {
                             </Col>
                         </Row>
                     </Col>
-                    <Col xxl={6} xl={6} lg={6} md={siderCollapse ? 8 : 24} sm={24} className='p-10'>
+                    <Col xxl={6} xl={6} lg={6} md={siderCollapse ? 8 : 24} sm={24} xs = {24} className='p-10'>
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}

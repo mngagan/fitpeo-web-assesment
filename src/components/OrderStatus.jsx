@@ -59,6 +59,7 @@ function OrderStatus() {
       offset: '-50%',
       style: {
         textAlign: 'center',
+        fontSize: 14
       },
       autoRotate: false,
       content: '{value}',
@@ -71,20 +72,20 @@ function OrderStatus() {
           const d = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
           const text = datum ? datum.type : 'Total';
           return renderStatistic(d, text, {
-            fontSize: 28,
+            fontSize: 14,
           });
         },
       },
       content: {
         offsetY: 4,
         style: {
-          fontSize: '32px',
+          fontSize: '14px',
         },
         customHtml: (container, view, datum, data) => {
           const { width } = container.getBoundingClientRect();
           const text = datum ? `$ ${datum.value}` : `$ ${data.reduce((r, d) => r + d.value, 0)}`;
           return renderStatistic(width, text, {
-            fontSize: 32,
+            fontSize: 20,
           });
         },
       },

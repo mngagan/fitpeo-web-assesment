@@ -97,9 +97,9 @@
 .avatar-image {
   position: absolute;
   font-size: 18px;
-  top: 130px;
+  // top: 130px;
   box-shadow: 0px 0px 3px 7px white;
-  left: 35%;
+  // left: 35%;
 }
 
 .three-dots {
@@ -170,7 +170,11 @@
 }
 
 .avatar-image-container {
-  position: inherit;
+  text-align: center;
+  width: 100%;
+  left: -40px;
+  top: 125px;
+  position: absolute;
 }
 
 .level-1-cards-container {
@@ -185,6 +189,12 @@
   color: #1890ff !important
 }
 
-.cursor-default{
+.cursor-default {
   cursor: default;
+
+
+}
+
+.display-none {
+  display: none
 }
